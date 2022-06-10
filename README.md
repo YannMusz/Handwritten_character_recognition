@@ -14,7 +14,7 @@ To create an image recognition application, a Convolutional Neural Network (CNN)
 
 ## Description of Source Data
 
-The dataset was obtained from [kaggle] (https://www.kaggle.com/datasets/sachinpatel21/az-handwritten-alphabets-in-csv-format?resource=download)
+The dataset was obtained from [kaggle](https://www.kaggle.com/datasets/sachinpatel21/az-handwritten-alphabets-in-csv-format?resource=download)
 
 It contains 26 folders (A-Z) containing handwritten images in size 2828 pixels, each alphabet in the image is centre fitted to 2020 pixel box.
 
@@ -22,6 +22,6 @@ Each image is stored as Gray-level.
 
 Kernel CSVToImages contains script to convert .CSV file to actual images in .png format in structured folder.
 
-## Questions to answer
+## Questions to Answer
 
 Can we create a model to accurately recognize handwritten characters?
