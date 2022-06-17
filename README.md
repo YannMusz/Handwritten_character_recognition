@@ -1,2 +1,2 @@
-# sample_project
-group project
+##Front End
+Basic Index page completed. 
