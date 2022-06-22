@@ -1,7 +1,13 @@
 from prediction import predict_letter
 
 from flask import Flask, jsonify, render_template, request
+import cv2
+from imageio import imread
+import io
+import base64
+from PIL import Image
 import time
+import numpy as np
 
 #################################################
 # Flask Setup
@@ -22,6 +28,9 @@ def welcome():
 def predict():
     params = request.get_json()
 
+    #print function for flask
+    app.logger.info(params["letter"])
+
     ## in js remember to have the object with key "letter" and transform it to base 64
     picture = params["letter"]
 
@@ -29,9 +38,21 @@ def predict():
         time.sleep(2)
     else: 
         prediction = predict_letter(picture)
+
+        # img = imread(io.BytesIO(base64.b64decode(picture)))
+
+        #FROM YANN
+        # nparr = np.frombuffer(base64.b64decode(encoded_data), np.uint8)
+        # img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        # print(img.shape)
+        app.logger.info("it works")
+        # prediction = predict_letter(img)
     
     # when http request name the response from the server response 
     return jsonify(response = prediction)
+
+    # return jsonify(response = params["letter"])
+    # return jsonify(response = imread(io.BytesIO(base64.b64decode(params["letter"]))))
    
 
 

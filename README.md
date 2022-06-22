@@ -25,3 +25,9 @@ Kernel CSVToImages contains script to convert .CSV file to actual images in .png
 ## Questions to Answer
 
 Can we create a model to accurately recognize handwritten characters?
+
+## Description of the data exploration
+
+
+
+## Description of the analysis phase

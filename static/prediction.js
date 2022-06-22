@@ -1,7 +1,7 @@
 window.onload = function () {
   console.log("Connection works");
   // NOTES: Make sure Yann has the same id
-
+  console.log("this is testing from js");
   // 1. CONVERT TO BASE 64 WHEN USER UPLOADS IMAGE
 
   const fileInput = document.getElementById("pictureInput");
@@ -32,6 +32,8 @@ window.onload = function () {
 
   // 2. HANDLE FORM SUBMIT WHEN USER SUBMITS IMAGE
 
+  //fetch() returns a Promise containing a Response object. The Promise can become either fulfilled or rejected. Fulfillment runs the first then(), returns its promise, and runs the second then(). Rejection throws on the first then() and jumps to the catch().
+
   const formElement = document.getElementById("formcarryForm");
 
   const handleForm = (event) => {
@@ -55,9 +57,12 @@ window.onload = function () {
       }
     })
       // convert response to json
-      .then((r) => r.json())
-      .then((res) => {
-        console.log("Res: " + res);
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Res: " + data);
+      })
+      .catch(function (error) {
+        console.log("Request filaed", error);
       });
   };
 
