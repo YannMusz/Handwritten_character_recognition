@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Alphabet Prediction Model</title>
+  <title>Handwritten prediction</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -36,15 +36,15 @@
     <div class="container d-flex justify-content-between">
 
       <div class="logo">
-        <h1><a href="index.html">Group Project</a></h1>
-        
+        <h1><a href="index.html">Handwritten</a></h1>
+      
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="{{url_for('login')}}">Home</a></li>
-          <li><a class="nav-link scrollto" href="{{url_for('login')}}">Login</a></li>
-       
+          <li><a class="nav-link scrollto " href="{{url_for('login')}}">Home</a></li>
+          <li><a class="nav-link scrollto active" href="{{url_for('login')}}">Login</a></li>
+       <li><a class="nav-link scrollto" href="{{url_for('main')}}">Prediction</a></li>
           
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -56,13 +56,139 @@
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
     <div class="container text-center text-md-left" data-aos="fade-up">
-      <h1>Alphabet Recognition</h1>
-      <h2>Machine Learning</h2>
+      <h1>Handwritten character recognition</h1>
+      <h2>Deep Learning</h2>
    
     </div>
   </section><!-- End Hero -->
 
   <main id="main">
+     
+    <!-- ======= Testimonials Section ======= -->
+    <section id="testimonials" class="testimonials">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          
+		  
+		  <style>
+
+
+body  {
+background-image: url("../static/images/email3.jpg");
+
+}
+ 
+ 
+    </style>
+		 <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+
+        function login(){
+        var uname = document.getElementById("uname").value;
+        var pwd = document.getElementById("pwd").value;
+
+	if(uname == "admin" && pwd == "admin")
+	{
+	  alert("Login Success!");
+	  
+	  window.location = "{{url_for('main')}}";
+	  return false;
+	}
+	else
+	{
+	alert("Invalid Credentials!")
+	}
+        }
+		
+		  
+
+
+ 
+    </script>
+	
+</head>
+
+ <body id="page-top">
+
+ 
+ 
+
+  <!-- Portfolio Section -->
+  <section class="page-section portfolio" id="portfolio">
+ 
+      <br>
+	  <br>
+			  
+			  
+                <div class="row">
+ <div class="section-title">
+         
+ 	  <h3>Login</h3>
+        </div>
+	 
+        <!-- Portfolio Item 1 -->
+        <div class="col-md-5 col-lg-4" style="margin-left:360px">
+		 
+		 <div class="control-group">
+			      <!-- Username -->
+				    
+			      <label class="control-label"   for="username"><b>Username</b></label>
+			      <div class="controls">
+			        <input type="text" id="uname" name="uname" placeholder="Username" class="form-control">
+			       
+				  </div>
+			    </div>
+				</br>
+				
+			    <div class="control-group">
+			      <!-- Password-->
+				  
+			      <label class="control-label"  for="password"><b>Password</b></label>
+			      <div class="controls">
+			        <input type="password" id="pwd" name="pwd" placeholder="password" class="form-control">
+			      
+				  </div>
+			    </div>
+				 <div class="col-md-9 col-lg-6" style="margin-left:-290px">
+			    <div class="control-group">
+			      <!-- Button -->
+				  <br>
+			      <div class="controls">
+				   
+			        <input type="button" class="btn btn-primary" value="Login" style="margin-left: 430px" onclick="login()">
+			      
+				  </div>
+			    </div>
+				 </div>
+  </div>
+  </div>
+ 
+ 
+   
+  </section>
+
+
+  
+
+    </body>
+		  
+		  
+		  
+		  
+           
+        </div>
+
+       
+
+      </div>
+    </section><!-- End Testimonials Section -->
     
 
   </main><!-- End #main -->
