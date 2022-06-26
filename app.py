@@ -1,60 +1,64 @@
-from prediction import predict_letter
-
-from flask import Flask, jsonify, render_template, request
-import cv2
-from imageio import imread
-import io
-import base64
-from PIL import Image
-import time
+from flask import Flask, request, jsonify, url_for, render_template
+import tensorflow as tf
+import uuid
+import os
+from tensorflow.keras.models import load_model
 import numpy as np
+from PIL import Image
+import base64
+from io import StringIO
+from io import BytesIO
+import cv2
+import pandas as pd
 
-#################################################
-# Flask Setup
-#################################################
 app = Flask(__name__)
+model = load_model('character_recog_model.h5',compile=True)
+ascii_map = pd.read_csv("mapping.csv")
 
 
-#################################################
-# Flask Routes
-#################################################
-
-@app.route("/", methods = ["POST", "GET"])
-def welcome():
-    "Testing"
-    return render_template("index.html")
-
-@app.route("/prediction", methods = ["POST", "GET"])
-def predict():
-    params = request.get_json()
-
-    #print function for flask
-    app.logger.info(params["letter"])
-
-    ## in js remember to have the object with key "letter" and transform it to base 64
-    picture = params["letter"]
-
-    while params is None: 
-        time.sleep(2)
-    else: 
-        prediction = predict_letter(picture)
-
-        # img = imread(io.BytesIO(base64.b64decode(picture)))
-
-        #FROM YANN
-        # nparr = np.frombuffer(base64.b64decode(encoded_data), np.uint8)
-        # img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-        # print(img.shape)
-        app.logger.info("it works")
-        # prediction = predict_letter(img)
+@app.route("/")
+@app.route("/index")
+def index():
+	return render_template('index.html')
     
-    # when http request name the response from the server response 
-    return jsonify(response = prediction)
+@app.route("/login")
+def login():
+	return render_template('login.html')
+    
+@app.route('/main')
+def main():
+    return render_template("main.html")
 
-    # return jsonify(response = params["letter"])
-    # return jsonify(response = imread(io.BytesIO(base64.b64decode(params["letter"]))))
+
+@app.route('/predict',methods=["POST"])
+def get_image():
+    canvasdata = request.form['canvasimg']
+    # print(canvasdata)
+    encoded_data = request.form['canvasimg'].split(',')[1]
+    nparr = np.frombuffer(base64.b64decode(encoded_data), np.uint8)
+    img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+    print(img.shape)
+
+    gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    gray_image = cv2.resize(gray_image, (28, 28), interpolation=cv2.INTER_LINEAR)
+    gray_image = gray_image/255.0
+    
+    gray_image = np.expand_dims(gray_image, axis=-1)
+    img = np.expand_dims(gray_image, axis=0)
+
+    print('Image received: {}'.format(img.shape))
+    prediction = model.predict(img)
+    cl = list(prediction[0])
+    print("Prediction : ",ascii_map["Character"][cl.index(max(cl))])
+
    
+
+    return render_template("main.html", value=ascii_map["Character"][cl.index(max(cl))])
+
+
+
 
 
 if __name__ == '__main__':
     app.run(debug=True)
+            
